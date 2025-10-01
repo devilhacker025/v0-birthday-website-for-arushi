@@ -1,6 +1,8 @@
 "use client"
 
 import { useMemo, useState } from "react"
+import { motion } from "framer-motion"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
 type Cell = "X" | "O" | null
@@ -95,27 +97,110 @@ export default function TicTacToe() {
   }
 
   return (
-    <main className="min-h-dvh bg-background text-foreground grid place-items-center px-6">
-      <section className="w-full max-w-md">
-        <h1 className="text-2xl font-semibold text-center">Tic Tac Toe</h1>
-        <p className="text-center text-muted-foreground mb-6">You are X. Arushi, go win!</p>
-        <div className="grid grid-cols-3 gap-2">
+    <main className="min-h-dvh bg-gradient-to-br from-blue-100 via-cyan-100 to-teal-100 grid place-items-center px-6">
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div className="absolute top-40 left-40 w-80 h-80 bg-teal-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+      </div>
+
+      <motion.section 
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6 }}
+        className="relative w-full max-w-md bg-white/80 backdrop-blur-md rounded-2xl p-8 border border-white/50 shadow-2xl"
+      >
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-600 mb-2">
+            Tic Tac Toe ⭕
+          </h1>
+          <p className="text-gray-600">You are <span className="font-bold text-blue-600">X</span>. Let's see if you can beat the AI! 🎯</p>
+        </div>
+
+        <div className="grid grid-cols-3 gap-3 mb-6">
           {board.map((cell, i) => (
-            <Button key={i} variant="outline" className="h-20 text-2xl bg-transparent" onClick={() => makeMove(i)}>
+            <motion.button
+              key={i}
+              whileHover={{ scale: cell ? 1 : 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => makeMove(i)}
+              className={`h-20 w-20 text-3xl font-bold rounded-xl border-2 transition-all duration-200 ${
+                cell 
+                  ? cell === "X" 
+                    ? "bg-blue-100 border-blue-300 text-blue-600" 
+                    : "bg-red-100 border-red-300 text-red-600"
+                  : "bg-white/50 border-gray-200 hover:bg-white/80 hover:border-gray-300"
+              }`}
+              disabled={!!cell || isGameOver}
+            >
               {cell}
-            </Button>
+            </motion.button>
           ))}
         </div>
-        <div className="mt-4 text-center">
-          {winner === "draw" && <p>Draw! Try again.</p>}
-          {winner === "X" && <p>Arushi (X) wins! 🎉</p>}
-          {winner === "O" && <p>O wins! But you can beat it 🙂</p>}
-          {!winner && <p>Turn: {turn}</p>}
+
+        <div className="text-center mb-6">
+          {winner === "draw" && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-4 bg-yellow-100 border border-yellow-300 rounded-xl"
+            >
+              <p className="text-yellow-700 font-semibold">It's a Draw! 🤝</p>
+              <p className="text-yellow-600 text-sm">Great game! Try again?</p>
+            </motion.div>
+          )}
+          {winner === "X" && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ type: "spring", stiffness: 200 }}
+              className="p-4 bg-green-100 border border-green-300 rounded-xl"
+            >
+              <p className="text-green-700 font-bold text-lg">🎉 Arushi Wins! 🎉</p>
+              <p className="text-green-600 text-sm">Amazing strategy! You're a champion! 🏆</p>
+            </motion.div>
+          )}
+          {winner === "O" && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-4 bg-red-100 border border-red-300 rounded-xl"
+            >
+              <p className="text-red-700 font-semibold">AI Wins This Time! 🤖</p>
+              <p className="text-red-600 text-sm">Don't worry, you'll get it next time! 💪</p>
+            </motion.div>
+          )}
+          {!winner && (
+            <div className="p-3 bg-gray-100 border border-gray-200 rounded-xl">
+              <p className="text-gray-700">
+                Current Turn: <span className={`font-bold ${turn === "X" ? "text-blue-600" : "text-red-600"}`}>
+                  {turn} {turn === "X" ? "(Your Turn)" : "(AI Thinking...)"}
+                </span>
+              </p>
+            </div>
+          )}
         </div>
-        <div className="mt-4 flex justify-center">
-          <Button onClick={reset}>Reset</Button>
+
+        <div className="flex justify-center gap-4">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={reset}
+            className="px-6 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-full font-medium shadow-md hover:shadow-lg transition-shadow"
+          >
+            New Game 🔄
+          </motion.button>
+          <Link href="/games">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-6 py-2 bg-gradient-to-r from-gray-500 to-gray-600 text-white rounded-full font-medium shadow-md hover:shadow-lg transition-shadow"
+            >
+              Back to Games
+            </motion.button>
+          </Link>
         </div>
-      </section>
+      </motion.section>
     </main>
   )
 }
