@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { DynamicShayari } from "@/components/dynamic-shayari"
 
 const cards = [
   { 
@@ -50,9 +51,11 @@ export default function WishesPage() {
           <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 mb-4">
             Birthday Wishes 🎂
           </h1>
-          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-2xl mx-auto mb-8">
             Choose your style — each wish tells a different story, crafted with love just for you ✨
           </p>
+          
+          <DynamicShayari className="max-w-2xl mx-auto mb-12" />
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

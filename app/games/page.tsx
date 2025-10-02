@@ -5,27 +5,18 @@ import { motion } from "framer-motion"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 
 const games = [
-  { 
-    title: "Tic Tac Toe", 
-    href: "/games/tic-tac-toe", 
+  {
+    title: "Tic Tac Toe",
+    href: "/games/tic-tac-toe",
     desc: "Classic 3x3 strategy game — outsmart the AI!",
     emoji: "⭕",
     gradient: "from-blue-400 to-cyan-500",
     bgGradient: "from-blue-50 to-cyan-50",
     status: "Ready to Play"
   },
-  { 
-    title: "Ludo", 
-    href: "/games/ludo", 
-    desc: "Traditional board game with dice and strategy",
-    emoji: "🎲",
-    gradient: "from-green-400 to-emerald-500",
-    bgGradient: "from-green-50 to-emerald-50",
-    status: "Coming Soon"
-  },
-  { 
-    title: "Snake & Ladder", 
-    href: "/games/snake-and-ladder", 
+  {
+    title: "Snake & Ladder",
+    href: "/games/snake-and-ladder",
     desc: "Climb ladders, avoid snakes in this classic game",
     emoji: "🐍",
     gradient: "from-yellow-400 to-orange-500",
@@ -65,8 +56,8 @@ export default function Games() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.2, duration: 0.6 }}
-              whileHover={{ 
-                scale: 1.05, 
+              whileHover={{
+                scale: 1.05,
                 y: -10,
                 transition: { duration: 0.2 }
               }}
@@ -77,7 +68,7 @@ export default function Games() {
                   <div className={`h-32 bg-gradient-to-br ${game.gradient} relative overflow-hidden flex items-center justify-center`}>
                     <div className="absolute inset-0 opacity-20">
                       {Array.from({ length: 12 }).map((_, i) => (
-                        <div 
+                        <div
                           key={i}
                           className="absolute rounded-full bg-white/40"
                           style={{
@@ -94,22 +85,21 @@ export default function Games() {
                       {game.emoji}
                     </span>
                   </div>
-                  
+
                   <CardHeader className="pb-2">
                     <div className="flex justify-between items-start">
                       <CardTitle className="text-xl font-bold text-gray-800 group-hover:text-gray-900 transition-colors">
                         {game.title}
                       </CardTitle>
-                      <span className={`text-xs px-2 py-1 rounded-full font-medium ${
-                        game.status === "Ready to Play" 
-                          ? "bg-green-100 text-green-700" 
-                          : "bg-yellow-100 text-yellow-700"
-                      }`}>
+                      <span className={`text-xs px-2 py-1 rounded-full font-medium ${game.status === "Ready to Play"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-yellow-100 text-yellow-700"
+                        }`}>
                         {game.status}
                       </span>
                     </div>
                   </CardHeader>
-                  
+
                   <CardContent className="pt-0">
                     <p className="text-gray-600 leading-relaxed mb-4">{game.desc}</p>
                     <div className="flex justify-center">

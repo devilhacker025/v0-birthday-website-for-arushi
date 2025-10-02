@@ -1,39 +1,122 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { CameraCapture } from "@/components/camera-capture"
 import { Card, CardContent } from "@/components/ui/card"
+import { generateMoodResponse, generateFlirtMessage } from "@/lib/gemini-api"
 
 type Mood = "good" | "sad" | "angry" | null
 
-const shayari = [
-  "Let the anger flow away, but never let your heart grow cold.",
-  "The one who smiles even in anger, that's your true friend.",
-  "Come, let's talk it out, your heart will feel lighter.",
+// Hardcoded shayari for sad mood
+const sadShayari = [
+  "Janamdin mubarak ho tumhe, tum duniya ki sabse khoobsurat ladki ho! ❤️",
+  "Tere smile se roshan hota hai sara jahaan, Happy Birthday meri jaan! 💫",
+  "Tumhari khushi se badi koi khushi nahi, Happy Birthday meri pyaari dost! 🥳",
+  "Zindagi ke har mod pe saath nibhane ke liye, thank you! Birthday pe tight wala hug! 🤗",
+  "Tum ho toh life hai beautiful, tum na ho toh life hai impossible! Happy Birthday! 💕",
+  "Tumhari aankhein jaise deep ocean, tumhari smile jaise sunshine, tumhara dil jaise pure gold - Happy Birthday to the most precious person! 💎",
+  "Har pal tumhare saath bitana hai, har khushi tumhare saath manana hai, life mein bas tumhe hi chahna hai - Happy Birthday my everything! 💫",
+  "Tum ho woh khushboo jo hawa mein rehti hai, tum ho woh roshni jo andheron mein dikhti hai, tum ho woh khushi jo dil ko sukoon deti hai! 🌹"
 ]
 
-const flirty = [
-  "Your smile is what makes my morning bright.",
-  "Did you look in the mirror today? What's the plan with all that beauty?",
-  "Today's agenda: just you, just smiles, just happiness.",
+// Hardcoded flirty messages for angry mood
+const flirtyMessages = [
+  "Kya tumne kabhi modeling ki hai? Kyunki tum toh model jaisi dikhti ho! 😍",
+  "Tumhari smile dekh ke toh dil garden garden ho jata hai! 💓",
+  "Kya karoon, tumhe dekh ke control kho deta hoon! 💘",
+  "Tum itni cute ho ki dictionary mein tumhari photo honi chahiye cute word ke saamne! 🥰",
+  "Tumhari aankhein itni magical hain, main toh kho gaya! ✨",
+  "Agar tum night sky ho, toh main shooting star - tumhari ore hi aata hoon! 🌠",
+  "Tumhare saath time ruksa jata hai, kyunki har pal special ban jata hai! ⏰",
+  "Tumhari aankhon mein dekha toh aise laga jaise time ruk gaya ho, duniya tham gayi ho, aur bas tum hi tum ho! 💫"
 ]
+
+// Function to get random item from array
+function getRandomItem<T>(array: T[]): T {
+  return array[Math.floor(Math.random() * array.length)];
+}
 
 export default function MoodPage() {
   const [mood, setMood] = useState<Mood>(null)
-  const [step, setStep] = useState(0)
+  const [message, setMessage] = useState("")
+  const [loading, setLoading] = useState(false)
   const [ok, setOk] = useState(false)
+  const [messageHistory, setMessageHistory] = useState<string[]>([])
 
-  const lines = useMemo(() => {
-    if (mood === "angry") return shayari
-    if (mood === "sad") return flirty
-    return []
-  }, [mood])
+  useEffect(() => {
+    // Show default message even when no mood is selected
+    if (!mood) {
+      fetchDefaultMessage();
+    } else {
+      fetchMoodResponse();
+    }
+  }, [mood]);
 
-  const handleImprove = () => {
-    if (step + 1 < lines.length) setStep(step + 1)
-    else setOk(true)
+  const fetchDefaultMessage = async () => {
+    setLoading(true);
+    try {
+      // Alternate between shayari and flirty messages
+      const isEven = messageHistory.length % 2 === 0;
+      const response = isEven 
+        ? await generateFlirtMessage() 
+        : await generateMoodResponse("happy");
+      
+      setMessage(response);
+      setMessageHistory(prev => [...prev, response]);
+    } catch (error) {
+      console.error("Error fetching response:", error);
+      setMessage("Tumhari smile se din ban jata hai! Keep smiling! ✨");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchMoodResponse = async () => {
+    setLoading(true);
+    try {
+      let response;
+      if (mood === "angry") {
+        // For angry mood, show flirty messages to cheer up
+        response = getRandomItem(flirtyMessages);
+      } else if (mood === "sad") {
+        // For sad mood, show shayari to make them happy
+        response = getRandomItem(sadShayari);
+      } else if (mood === "good") {
+        response = await generateMoodResponse("happy");
+      }
+      
+      // Make sure we don't repeat the same message
+      if (messageHistory.includes(response)) {
+        // Try one more time if we got a duplicate
+        if (mood === "angry") {
+          response = getRandomItem(flirtyMessages);
+        } else if (mood === "sad") {
+          response = getRandomItem(sadShayari);
+        } else if (mood === "good") {
+          response = await generateMoodResponse("happy");
+        }
+      }
+      
+      setMessage(response || "Kya baat hai! Aaj toh mood ekdum mast hai!");
+      setMessageHistory(prev => [...prev, response]);
+    } catch (error) {
+      console.error("Error fetching response:", error);
+      setMessage("Tumhari aankhein jaise deep ocean, tumhari smile jaise sunshine - you're amazing!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleImprove = async () => {
+    // If no mood is selected, fetch a new default message
+    if (!mood) {
+      await fetchDefaultMessage();
+    } else {
+      await fetchMoodResponse();
+      // Never automatically set ok to true - let user click "Feeling Better" button
+    }
   }
 
   return (
@@ -58,12 +141,44 @@ export default function MoodPage() {
         </motion.div>
 
         {!mood && (
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto"
-          >
+          <>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="text-center mb-8"
+            >
+              <Card className="bg-gradient-to-br from-purple-50 to-pink-50 border-purple-200 max-w-2xl mx-auto">
+                <CardContent className="p-8">
+                  <div className="text-6xl mb-6">💖</div>
+                  {loading ? (
+                    <div className="flex justify-center items-center py-8">
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+                    </div>
+                  ) : (
+                    <p className="text-xl leading-relaxed mb-6 italic text-purple-700">
+                      "{message}"
+                    </p>
+                  )}
+                  <div className="flex gap-4 justify-center">
+                    <Button
+                      onClick={handleImprove}
+                      className="bg-purple-500 hover:bg-purple-600 text-white px-6 py-2"
+                      disabled={loading}
+                    >
+                      {"One More"}
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto"
+            >
             <motion.div
               whileHover={{ scale: 1.05, y: -5 }}
               whileTap={{ scale: 0.95 }}
@@ -103,6 +218,7 @@ export default function MoodPage() {
               </Card>
             </motion.div>
           </motion.div>
+          </>
         )}
 
         {mood === "good" && (
@@ -133,26 +249,28 @@ export default function MoodPage() {
             <Card className={`max-w-2xl mx-auto ${mood === "sad" ? "bg-gradient-to-br from-blue-50 to-cyan-50 border-blue-200" : "bg-gradient-to-br from-red-50 to-orange-50 border-red-200"}`}>
               <CardContent className="p-8">
                 <div className="text-6xl mb-6">{mood === "sad" ? "💙" : "🌟"}</div>
-                <motion.p
-                  key={step}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                  className={`text-xl leading-relaxed mb-6 italic ${mood === "sad" ? "text-blue-700" : "text-red-700"}`}
-                >
-                  "{lines[step]}"
-                </motion.p>
+                {loading ? (
+                  <div className="flex justify-center items-center py-8">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+                  </div>
+                ) : (
+                  <p className={`text-xl leading-relaxed mb-6 italic ${mood === "sad" ? "text-blue-700" : "text-red-700"}`}>
+                    "{message}"
+                  </p>
+                )}
                 <div className="flex gap-4 justify-center">
                   <Button
                     onClick={handleImprove}
                     className={`${mood === "sad" ? "bg-blue-500 hover:bg-blue-600" : "bg-red-500 hover:bg-red-600"} text-white px-6 py-2`}
+                    disabled={loading}
                   >
-                    {step < lines.length - 1 ? "Next Quote" : "One More"}
+                    {"One More"}
                   </Button>
                   <Button
                     variant="outline"
                     onClick={() => setOk(true)}
                     className={`${mood === "sad" ? "border-blue-300 text-blue-700 hover:bg-blue-50" : "border-red-300 text-red-700 hover:bg-red-50"} px-6 py-2`}
+                    disabled={loading}
                   >
                     Feeling Better? 😊
                   </Button>

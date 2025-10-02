@@ -1,9 +1,10 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { WinMessage } from "@/components/win-message"
 
 type Cell = "X" | "O" | null
 
@@ -28,9 +29,17 @@ function checkWinner(b: Cell[]): Cell | "draw" | null {
 export default function TicTacToe() {
   const [board, setBoard] = useState<Cell[]>(Array(9).fill(null))
   const [turn, setTurn] = useState<"X" | "O">("X")
+  const [showWinMessage, setShowWinMessage] = useState(false)
   const winner = useMemo(() => checkWinner(board), [board])
 
   const isGameOver = !!winner
+  
+  // Show win message when player (X) wins
+  useEffect(() => {
+    if (winner === "X") {
+      setShowWinMessage(true);
+    }
+  }, [winner]);
 
   function makeMove(i: number) {
     if (board[i] || isGameOver) return
@@ -201,6 +210,17 @@ export default function TicTacToe() {
           </Link>
         </div>
       </motion.section>
+      
+      {showWinMessage && (
+        <WinMessage 
+          game="tic-tac-toe" 
+          onClose={() => {
+             setShowWinMessage(false);
+             setBoard(Array(9).fill(null));
+             setTurn("X");
+           }} 
+        />
+      )}
     </main>
   )
 }
