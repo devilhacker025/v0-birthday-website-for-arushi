@@ -1,16 +1,54 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ConfettiBursts } from "@/components/confetti-bursts"
-import Image from "next/image"
 import Link from "next/link"
+
+// Simple working image component
+const SimpleImage = ({ src, alt, className }: {
+  src: string,
+  alt: string,
+  className?: string
+}) => {
+  const [imageError, setImageError] = useState(false)
+
+  const handleError = () => {
+    console.log(`Image failed to load: ${src}`)
+    setImageError(true)
+  }
+
+  const handleLoad = () => {
+    setImageError(false)
+  }
+
+  if (imageError) {
+    return (
+      <div className="w-full h-full bg-gradient-to-br from-pink-100 to-purple-100 flex items-center justify-center border-2 border-dashed border-pink-300 rounded-lg">
+        <div className="text-pink-600 text-center p-2">
+          <div className="text-2xl mb-1">💕</div>
+          <div className="text-xs font-medium">Arushi's Photo</div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className={className}
+      onError={handleError}
+      onLoad={handleLoad}
+    />
+  )
+}
 
 // Love Card Component with animated heart tree
 const LoveCard = () => {
   const [showText, setShowText] = useState(false)
   const [currentTextIndex, setCurrentTextIndex] = useState(0)
-  const [hearts, setHearts] = useState<Array<{id: number, x: number, y: number}>>([])
+  const [hearts, setHearts] = useState<Array<{ id: number, x: number, y: number }>>([])
 
   const messages = [
     "You are the most wonderful person I've ever met :)",
@@ -24,6 +62,8 @@ const LoveCard = () => {
   ]
 
   useEffect(() => {
+
+
     // Start the animation sequence
     const timer1 = setTimeout(() => {
       setShowText(true)
@@ -61,8 +101,8 @@ const LoveCard = () => {
           <motion.div
             key={heart.id}
             initial={{ opacity: 0, scale: 0, x: `${heart.x}%`, y: `${heart.y}%` }}
-            animate={{ 
-              opacity: [0, 1, 0], 
+            animate={{
+              opacity: [0, 1, 0],
               scale: [0, 1, 0],
               y: `${heart.y - 20}%`,
               rotate: 360
@@ -80,13 +120,13 @@ const LoveCard = () => {
         <div className="w-full h-64 rounded-xl bg-gradient-to-br from-pink-100 to-red-100 flex items-center justify-center relative overflow-hidden">
           <motion.div
             initial={{ scale: 0, rotate: 0 }}
-            animate={{ 
-              scale: [0, 1.2, 1], 
+            animate={{
+              scale: [0, 1.2, 1],
               rotate: [0, 10, -10, 0],
             }}
-            transition={{ 
-              duration: 2, 
-              type: "spring",
+            transition={{
+              duration: 2,
+              ease: "easeInOut",
               repeat: Infinity,
               repeatDelay: 3
             }}
@@ -94,20 +134,20 @@ const LoveCard = () => {
           >
             💖
           </motion.div>
-          
+
           {/* Pulsing rings */}
           {[1, 2, 3].map((ring) => (
             <motion.div
               key={ring}
               className="absolute inset-0 border-4 border-pink-300 rounded-full"
               initial={{ scale: 0, opacity: 1 }}
-              animate={{ 
-                scale: [0, 2, 3], 
-                opacity: [1, 0.5, 0] 
+              animate={{
+                scale: [0, 2, 3],
+                opacity: [1, 0.5, 0]
               }}
-              transition={{ 
-                duration: 2, 
-                repeat: Infinity, 
+              transition={{
+                duration: 2,
+                repeat: Infinity,
                 delay: ring * 0.5,
                 ease: "easeOut"
               }}
@@ -115,7 +155,7 @@ const LoveCard = () => {
           ))}
         </div>
       </div>
-      
+
       <AnimatePresence>
         {showText && (
           <motion.div
@@ -124,14 +164,14 @@ const LoveCard = () => {
             transition={{ duration: 0.8 }}
             className="space-y-6"
           >
-            <motion.h3 
+            <motion.h3
               className="text-3xl font-bold text-pink-600"
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
               Hello my dost,
             </motion.h3>
-            
+
             <div className="p-6 bg-gradient-to-r from-pink-50 to-red-50 rounded-xl shadow-inner">
               <motion.p
                 key={currentTextIndex}
@@ -143,20 +183,19 @@ const LoveCard = () => {
               >
                 {messages[currentTextIndex]}
               </motion.p>
-              
+
               <div className="flex justify-center mt-4 space-x-1">
                 {messages.map((_, index) => (
                   <div
                     key={index}
-                    className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                      index === currentTextIndex ? 'bg-pink-500' : 'bg-pink-200'
-                    }`}
+                    className={`w-2 h-2 rounded-full transition-colors duration-300 ${index === currentTextIndex ? 'bg-pink-500' : 'bg-pink-200'
+                      }`}
                   />
                 ))}
               </div>
             </div>
-            
-            <motion.p 
+
+            <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}
@@ -181,24 +220,19 @@ const BookCard = () => {
       title: "My best friend 💕",
       content: (
         <div className="text-center space-y-4">
-          <motion.div 
+          <motion.div
             className="relative w-40 h-40 mx-auto overflow-hidden rounded-lg shadow-xl"
             whileHover={{ scale: 1.05, rotate: 2 }}
             transition={{ duration: 0.3 }}
           >
-            <Image 
-              src="/wish/normal/crush/photo/Screenshot_2024-10-03-17-33-20-226-edit_com.instagram.android.jpg" 
-              alt="Arushi" 
-              fill 
-              className="object-cover"
-              onError={(e) => {
-                console.log("Failed to load crush image")
-                e.currentTarget.src = "/placeholder-user.jpg"
-              }}
+            <SimpleImage
+              src="/images/1.jpg"
+              alt="Arushi"
+              className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-purple-500/20 to-transparent" />
           </motion.div>
-          <h2 className="text-lg font-bold text-purple-600">@yash.sri.025</h2>
+          <h2 className="text-lg font-bold text-purple-600">@aaaru_16</h2>
         </div>
       )
     },
@@ -227,7 +261,7 @@ const BookCard = () => {
           >
             Would you do me the honor of allowing me 🫶 to be your co-author in this😚 beautiful journey called life🥹💕?"
           </motion.p>
-          <motion.p 
+          <motion.p
             className="text-purple-600 font-semibold"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -247,23 +281,23 @@ const BookCard = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            Tum dost ho, par kuch zyada,<br/>Har pal mein tumhara saaya,
+            Tum dost ho, par kuch zyada,<br />Har pal mein tumhara saaya,
           </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            Baaton mein teri hai ek jaadu,<br/>Dil se dil ka hai kuch vaada,
+            Baaton mein teri hai ek jaadu,<br />Dil se dil ka hai kuch vaada,
           </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
           >
-            Ye rishta hai kuch khaas, kuch naya,<br/>Dosti ke rangon mein pyaar bhi chhupa.
+            Ye rishta hai kuch khaas, kuch naya,<br />Dosti ke rangon mein pyaar bhi chhupa.
           </motion.p>
-          <motion.p 
+          <motion.p
             className="text-purple-600 font-semibold"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -311,9 +345,9 @@ const BookCard = () => {
         ))}
       </div>
 
-      <motion.h3 
+      <motion.h3
         className="text-3xl font-bold text-purple-600 relative z-10"
-        animate={{ 
+        animate={{
           scale: [1, 1.02, 1],
           textShadow: [
             "0 0 0px #7c3aed",
@@ -325,15 +359,15 @@ const BookCard = () => {
       >
         Friendship Book 📖
       </motion.h3>
-      
+
       <div className="relative w-80 h-96 mx-auto">
         {/* Book shadow */}
         <div className="absolute inset-0 bg-black/20 rounded-xl transform translate-x-2 translate-y-2 blur-sm" />
-        
+
         <motion.div
           className="absolute inset-0 bg-gradient-to-br from-purple-100 to-blue-100 rounded-xl shadow-2xl p-6 cursor-pointer border-2 border-purple-200 relative z-10"
           onClick={flipPage}
-          animate={{ 
+          animate={{
             rotateY: isFlipping ? [0, 90, 180, 90, 0] : 0,
             scale: isFlipping ? [1, 0.95, 0.9, 0.95, 1] : 1
           }}
@@ -343,9 +377,9 @@ const BookCard = () => {
         >
           {/* Book binding */}
           <div className="absolute left-0 top-0 bottom-0 w-2 bg-purple-300 rounded-l-xl" />
-          
+
           <div className="h-full flex flex-col justify-between">
-            <motion.h4 
+            <motion.h4
               key={`title-${currentPage}`}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -353,7 +387,7 @@ const BookCard = () => {
             >
               {pages[currentPage].title}
             </motion.h4>
-            
+
             <div className="flex-1 flex items-center justify-center">
               <motion.div
                 key={`content-${currentPage}`}
@@ -364,27 +398,27 @@ const BookCard = () => {
                 {pages[currentPage].content}
               </motion.div>
             </div>
-            
+
             <div className="flex justify-between items-center">
               <p className="text-xs text-gray-500">Click to flip page</p>
               <p className="text-xs text-gray-500">({currentPage + 1}/{pages.length})</p>
             </div>
           </div>
-          
+
           {/* Page corner fold effect */}
           <div className="absolute top-4 right-4 w-6 h-6 bg-white/50 transform rotate-45 origin-bottom-left" />
         </motion.div>
       </div>
-      
-      <motion.p 
+
+      <motion.p
         className="text-purple-600 font-semibold relative z-10"
-        animate={{ 
+        animate={{
           scale: [1, 1.02, 1],
           color: ["#7c3aed", "#8b5cf6", "#7c3aed"]
         }}
         transition={{ duration: 2, repeat: Infinity }}
       >
-        Yash ki taraf se sirf ek hi dua: tere din hamesha khushiyon se bhare ho. 💜
+        I wish tere din hamesha khushiyon se bhare ho. 💜
       </motion.p>
     </div>
   )
@@ -396,15 +430,17 @@ const GalleryCard = () => {
   const [currentTime, setCurrentTime] = useState(0)
 
   const images = [
-    "/wish/normal/gat/photo/Me/1728604679808.jpg",
-    "/wish/normal/gat/photo/Me/1728604679846.jpg", 
-    "/wish/normal/gat/photo/Me/1728604679923.jpg",
-    "/wish/normal/gat/photo/Me/1728604679961.jpg",
-    "/wish/normal/gat/photo/Me/1728604679999.jpg",
-    "/wish/normal/gat/photo/Me/1.jpg"
+    "/images/1728604679808.jpg",
+    "/images/1728604679846.jpg",
+    "/images/1728604679923.jpg",
+    "/images/1728604679961.jpg",
+    "/images/1728604679999.jpg",
+    "/images/1.jpg"
   ]
 
   useEffect(() => {
+
+
     const timer = setInterval(() => {
       setCurrentTime(Date.now() * 0.001)
     }, 50)
@@ -437,9 +473,9 @@ const GalleryCard = () => {
         ))}
       </div>
 
-      <motion.h3 
+      <motion.h3
         className="text-3xl font-bold text-blue-600 relative z-10"
-        animate={{ 
+        animate={{
           textShadow: [
             "0 0 0px #3b82f6",
             "0 0 10px #3b82f6",
@@ -450,28 +486,28 @@ const GalleryCard = () => {
       >
         MY LADAKU DOST
       </motion.h3>
-      
-      <motion.p 
+
+      <motion.p
         className="text-xl font-medium text-blue-700 relative z-10"
         animate={{ scale: [1, 1.02, 1] }}
         transition={{ duration: 1.5, repeat: Infinity }}
       >
         CAN'T EXPLAIN THIS FRIENDSHIP
       </motion.p>
-      
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-8 relative z-10">
+
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-8 relative z-10 max-w-4xl mx-auto">
         {images.map((src, index) => (
-          <motion.div 
+          <motion.div
             key={index}
-            className="relative w-full h-32 overflow-hidden rounded-lg shadow-lg cursor-pointer group"
-            whileHover={{ 
-              scale: 1.1, 
-              rotateY: 15,
+            className="relative aspect-square overflow-hidden rounded-lg shadow-lg cursor-pointer group"
+            whileHover={{
+              scale: 1.05,
+              rotateY: 10,
               rotateX: 5,
               z: 50
             }}
             animate={{
-              rotateY: hoveredImage === index ? 0 : Math.sin(currentTime + index) * 8,
+              rotateY: hoveredImage === index ? 0 : Math.sin(currentTime + index) * 5,
               rotateZ: hoveredImage === index ? 0 : Math.cos(currentTime + index * 0.5) * 2,
             }}
             transition={{ duration: 0.3 }}
@@ -479,20 +515,19 @@ const GalleryCard = () => {
             onHoverEnd={() => setHoveredImage(null)}
             style={{ transformStyle: "preserve-3d" }}
           >
-            <Image 
+            <SimpleImage
               src={src}
-              alt={`Memory ${index + 1}`} 
-              fill 
-              className="object-cover transition-all duration-300 group-hover:brightness-110"
-              onError={(e) => {
-                console.log(`Failed to load image: ${src}`)
-                // Fallback to placeholder
-                e.currentTarget.src = "/placeholder.jpg"
-              }}
+              alt={`Memory ${index + 1}`}
+              className="w-full h-full object-cover object-center transition-all duration-300 group-hover:brightness-110 group-hover:scale-110"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <div className="absolute inset-0 border-2 border-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg" />
-            
+
+            {/* Image number indicator */}
+            <div className="absolute top-2 left-2 bg-blue-500/80 text-white text-xs px-2 py-1 rounded-full font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              {index + 1}
+            </div>
+
             {/* Sparkle effect on hover */}
             {hoveredImage === index && (
               <motion.div
@@ -524,10 +559,10 @@ const GalleryCard = () => {
           </motion.div>
         ))}
       </div>
-      
-      <motion.p 
+
+      <motion.p
         className="font-semibold text-xl text-blue-600 mt-8 relative z-10"
-        animate={{ 
+        animate={{
           scale: [1, 1.05, 1],
           color: ["#2563eb", "#3b82f6", "#2563eb"]
         }}
@@ -543,14 +578,14 @@ const GalleryCard = () => {
 const cards = [
   {
     id: "love",
-    title: "Love Card",
+    title: "simple",
     emoji: "💖",
-    description: "Words from the heart",
+    description: "Words from the  mind",
     bgColor: "from-pink-400 to-red-500",
     component: LoveCard,
   },
   {
-    id: "crush", 
+    id: "crush",
     title: "Friendship Book",
     emoji: "📖",
     description: "Our friendship story",
@@ -559,7 +594,7 @@ const cards = [
   },
   {
     id: "gat",
-    title: "Photo Gallery", 
+    title: "Photo Gallery",
     emoji: "📸",
     description: "Treasure of memories",
     bgColor: "from-blue-400 to-teal-500",
@@ -586,7 +621,7 @@ export default function NormalWish() {
   return (
     <main className="min-h-dvh bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 text-foreground py-6 md:py-12 px-4 md:px-6 overflow-hidden">
       {showConfetti && <ConfettiBursts />}
-      
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -604,18 +639,18 @@ export default function NormalWish() {
               <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 drop-shadow-sm">
                 Arushi, tu meri life ka ek important part hai
               </h1>
-              
+
               <p className="text-base md:text-lg text-gray-700 max-w-2xl mx-auto px-4">
                 Aaj ke din tujhe sirf khushiyan milni chahiye. Happy Birthday from the bottom of my heart 🎂❤️
               </p>
             </motion.div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               {cards.map((card, index) => (
                 <motion.div
                   key={card.id}
-                  whileHover={{ 
-                    scale: 1.02, 
+                  whileHover={{
+                    scale: 1.02,
                     y: -4,
                     boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
                   }}
@@ -629,7 +664,7 @@ export default function NormalWish() {
                   <div className={`h-40 md:h-48 bg-gradient-to-br ${card.bgColor} flex flex-col items-center justify-center p-4 md:p-6 relative overflow-hidden`}>
                     <div className="absolute inset-0 opacity-20">
                       {Array.from({ length: 15 }).map((_, i) => (
-                        <div 
+                        <div
                           key={i}
                           className="absolute rounded-full bg-white/30"
                           style={{
@@ -648,7 +683,7 @@ export default function NormalWish() {
                   <div className="p-4 md:p-6">
                     <p className="text-gray-600 text-center font-medium text-sm md:text-base">{card.description}</p>
                     <div className="mt-4 flex justify-center">
-                      <motion.button 
+                      <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-medium text-sm md:text-base"
@@ -665,7 +700,7 @@ export default function NormalWish() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ 
+            transition={{
               duration: 0.5,
               type: "spring",
               stiffness: 100
@@ -683,9 +718,9 @@ export default function NormalWish() {
               </svg>
               Back to Cards
             </motion.button>
-            
+
             {selectedCardData && <selectedCardData.component />}
-            
+
             <div className="mt-6 md:mt-8 flex justify-center">
               <Link href="/wishes" className="text-purple-600 hover:text-purple-800 font-medium text-sm md:text-base">
                 ← Back to All Wishes

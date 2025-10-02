@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link"
-import Image from "next/image"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 
@@ -45,7 +44,7 @@ export default function HeroPage() {
           >
             🎂 Happy Birthday! 🎂
           </motion.div>
-          
+
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -55,7 +54,7 @@ export default function HeroPage() {
             Arushi Singh
             <span className="block text-white text-2xl md:text-3xl mt-2">An Amazing Person</span>
           </motion.h1>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -67,7 +66,7 @@ export default function HeroPage() {
             The world feels incomplete without her - she makes every moment special.
           </motion.p>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.6 }}
@@ -76,11 +75,11 @@ export default function HeroPage() {
             <Button asChild className="rounded-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white border-0 px-6 py-6 h-auto text-lg font-medium">
               <Link href="/wishes">See Wishes ✨</Link>
             </Button>
-            
+
             <Button asChild className="rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/20 px-6 py-6 h-auto text-lg font-medium">
               <Link href="/games">Play Games 🎮</Link>
             </Button>
-            
+
             <Button asChild className="rounded-full bg-white/5 backdrop-blur-sm hover:bg-white/10 text-white border border-white/10 px-6 py-6 h-auto text-lg font-medium">
               <Link href="/mood">Set Mood 🎵</Link>
             </Button>
@@ -95,15 +94,17 @@ export default function HeroPage() {
           className="md:w-1/2 mt-10 md:mt-0 flex justify-center"
         >
           <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl shadow-purple-500/30">
-            <div className="absolute inset-0 bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-600 opacity-90"></div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <img 
-                src="/images/arushi.jpg" 
-                alt="Arushi Singh" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-purple-900/60 to-transparent"></div>
+            <img
+              src="/images/arushi.jpg"
+              alt="Arushi Singh"
+              className="w-full h-full object-cover"
+              style={{
+                objectPosition: '70% 0%',
+                transform: 'scale(1.1)'
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent"></div>
+            <div className="absolute inset-0 ring-2 ring-white/10 ring-inset rounded-full"></div>
           </div>
         </motion.div>
       </div>
