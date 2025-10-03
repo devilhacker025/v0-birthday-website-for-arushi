@@ -1,31 +1,31 @@
 // Types for different content types
 export type ContentType = 'shayari' | 'win-message' | 'mood-response' | 'flirt';
 
-// Hardcoded shayari messages - Tier 1 (Normal)
+// Hardcoded shayari messages - Tier 1 (Romantic & Emotional)
 const shayariMessages = [
-  "Janamdin mubarak ho tumhe, tum duniya ki sabse khoobsurat ladki ho! ❤️",
-  "Birthday hai tera aaj special day, tu hai meri life mein sabse best, yaar! 🎂",
-  "Tere smile se roshan hota hai sara jahaan, Happy Birthday meri jaan! 💫",
-  "Cake kaato, wish maango, khushiyan baanto, aur hamesha muskurate raho! 🎉",
-  "Tumhari khushi se badi koi khushi nahi, Happy Birthday meri pyaari dost! 🥳"
+  "Tumhari muskaan dekh ke lagta hai jaise khuda ne sabse khoobsurat cheez banai hai 😍",
+  "Tere bina din adhura, tere saath raat haseen, tu hai meri zindagi ka sabse pyaara hissa 💕",
+  "Aankhon mein tera chehra, dil mein tera pyaar, tum ho meri duniya ka sabse khoobsurat intezaar ✨",
+  "Jab se dekha hai tumhe, dil kehta hai bas tumhe hi chahiye, tum ho meri mohabbat ka sabse haseen silsila 💖",
+  "Tumhari baatein sunke dil garden garden ho jata hai, tum ho woh khushi jo har gham ko bhula deti hai 🌹"
 ];
 
-// Hardcoded shayari messages - Tier 2 (Better)
+// Hardcoded shayari messages - Tier 2 (Deep Emotions)
 const betterShayariMessages = [
-  "Zindagi ke har mod pe saath nibhane ke liye, thank you! Birthday pe tight wala hug! 🤗",
-  "Tum ho toh life hai beautiful, tum na ho toh life hai impossible! Happy Birthday! 💕",
-  "Janamdin pe ek promise, hamesha rahenge saath, chahe jo bhi ho halaat! 🌟",
-  "Candles blow karo, cake khao, aur life ko full enjoy karo! Happy Birthday! 🎂",
-  "Tum ho sabse special, kyunki tumhari smile hai magical! Happy Birthday! ✨"
+  "Ishq mein tumhare, dil ne seekha hai jeena, tumhare bina lagta hai jaise saans lena bhi mushkil hai 💫",
+  "Tumhari aankhon mein jo nasha hai, woh kisi aur mein nahi, tum ho meri mohabbat ki sabse khoobsurat shuruaat 💘",
+  "Dil kehta hai tumse, ki tum ho meri manzil, tumhare bina main hoon adhura, tum ho meri zindagi ka sabse haseen haqeeqat 🌟",
+  "Tumhare ishq mein pagal hoon main, tumhare bina incomplete hoon main, tum ho woh raah jo mujhe meri manzil tak le jaati hai 💕",
+  "Mohabbat ka matlab samjha tumne, dil ki duniya dikhayi tumne, tum ho woh khwaabon ka raaja jo haqeeqat ban gaya 👑"
 ];
 
-// Hardcoded shayari messages - Tier 3 (Best)
+// Hardcoded shayari messages - Tier 3 (Soul-touching)
 const bestShayariMessages = [
-  "Tumhari aankhein jaise deep ocean, tumhari smile jaise sunshine, tumhara dil jaise pure gold - Happy Birthday to the most precious person! 💎",
-  "Har pal tumhare saath bitana hai, har khushi tumhare saath manana hai, life mein bas tumhe hi chahna hai - Happy Birthday my everything! 💫",
-  "Tum ho woh khushboo jo hawa mein rehti hai, tum ho woh roshni jo andheron mein dikhti hai, tum ho woh khushi jo dil ko sukoon deti hai! 🌹",
-  "Tumhare bina life incomplete hai, tumhare saath har moment sweet hai, you're the one I always want to meet - Happy Birthday! 🎀",
-  "Sitaron se bhi zyada chamakti ho tum, phoolon se bhi zyada khilti ho tum, mere dil mein hamesha rehti ho tum - Happy Birthday! 🌟"
+  "Tumhare ishq mein dooba hoon itna ki khud ko bhool gaya hoon, tumhari mohabbat mein paya hai jo kabhi socha nahi tha 💫✨",
+  "Dil ki har dhadak mein tumhara naam hai, rooh ki har saans mein tumhara ehsaas hai, tum ho meri zindagi ka sabse khoobsurat jazbaat 💖",
+  "Tumhare bina main sirf ek kahani hoon, tumhare saath main ek mukammal kitaab hoon, tum ho meri mohabbat ka sabse haseen bayan 📖💕",
+  "Ishq tumse kiya toh paya hai jannat, tumhari mohabbat mein mila hai sukoon-e-qalb, tum ho meri rooh ka sabse pyaara hissa 🌹",
+  "Tumhari ek nazar mein chhupe hain hazaaron khwaab, tumhare ek smile mein basi hai meri puri duniya, tum ho meri mohabbat ki sabse khoobsurat misaal 💎"
 ];
 
 // Hardcoded win messages - Tier 1 (Normal)
@@ -55,88 +55,88 @@ const bestWinMessages = [
   "Champion of champions! Tumhare jaisa player maine aaj tak nahi dekha! Absolutely brilliant! 👑🔥"
 ];
 
-// Hardcoded mood responses - Tier 1 (Normal)
+// Hardcoded mood responses - Tier 1 (Caring & Supportive)
 const moodResponses = {
   happy: [
-    "Kya baat hai! Aaj toh mood ekdum mast hai! Aise hi khush raho hamesha! 😊",
-    "Good mood mein ho toh life bhi good lagti hai! Enjoy karo aaj ka din! 🌞",
-    "Khushi ka din hai aaj! Chalo celebrate karte hain! 🎉"
+    "Tumhari khushi dekh ke mera dil bhi khush ho gaya! Aise hi muskurate raho hamesha! 😊💕",
+    "Jab tum happy hoti ho toh puri duniya beautiful lag jaati hai! Keep shining! ✨🌟",
+    "Tumhari smile is like sunshine on a cloudy day! Aaj ka din celebrate karo! 🌞🎉"
   ],
   angry: [
-    "Arrey gussa thook do, life enjoy karo! Sab theek ho jayega! 😌",
-    "Gussa sirf tumhe hi hurt karta hai. Deep breath lo aur relax karo! 🧘‍♀️",
-    "Thoda sa chocolate khao, mood instantly better ho jayega! 🍫"
+    "Gussa karne se tumhare cute cheeks red ho jate hain! But smile better lagti hai! 😊💕",
+    "Main hoon na tumhare saath! Jo bhi problem hai, together solve karenge! 🤗💪",
+    "Tumhara gussa bhi cute lagta hai, but tumhari smile sabse precious hai! 😌🌹"
   ],
   sad: [
-    "Arrey sad kyun ho? Tumhari smile se toh chaand bhi sharma jaye! 🌙",
-    "Tension not! Jo bhi problem hai, mil ke solve karenge! 💪",
-    "Sad hona allowed nahi hai aaj! Special ho tum, special feel karo! ✨"
+    "Tumhari aankhon mein aansu ache nahi lagte, please smile karo mere liye! 🥺💕",
+    "Sad mat ho, main hoon na tumhare saath! Sab theek ho jayega, trust me! 🤗✨",
+    "Tumhari ek smile ke liye main kuch bhi kar sakta hoon! Please khush ho jao! 😊💖"
   ]
 };
 
-// Hardcoded mood responses - Tier 2 (Better)
+// Hardcoded mood responses - Tier 2 (Deeply Caring)
 const betterMoodResponses = {
   happy: [
-    "Jab tum khush hoti ho toh duniya bhi khush ho jaati hai! 💫",
-    "Tumhari smile se din ban jata hai! Keep smiling! ✨",
-    "Khushi tumhe suit karti hai! Aaj ka din special banao! 🌈"
+    "Tumhari khushi meri sabse badi khushi hai! Aise hi glowing raho hamesha! 💫✨",
+    "Jab tum smile karti ho toh angels bhi jealous ho jate hain! You're glowing! 😇💖",
+    "Tumhari happiness is contagious! Aaj ka din magical banao! 🌈🎭"
   ],
   angry: [
-    "Gussa is temporary, but smile is permanent! Chalo smile karo! 😊",
-    "Koi baat nahi, kabhi kabhi gussa aana normal hai. Par ab smile karo! 🌈",
-    "Gussa door, khushi paas! Ab mood change karo aur enjoy karo! 🎭"
+    "Tumhara gussa bhi cute hai, but tumhari smile meri weakness hai! Please? 🥺💕",
+    "Main tumhare saath hoon har situation mein! Gussa thook do, let's make it better! 🤗💪",
+    "Tumhare liye main kuch bhi kar sakta hoon! Bas ek smile de do! 😊🌹"
   ],
   sad: [
-    "Tumhari aankhon mein aansu ache nahi lagte. Chalo smile karo! 💕",
-    "Life mein ups and downs aate rehte hain, but tum strong ho! 🌟",
-    "Sad mood ko bye bye karo, happy mood ko hello bolo! 👋😊"
+    "Tumhare aansu dekh ke mera dil toot jata hai! Please khush ho jao mere liye! 💔💕",
+    "Tum strong ho, brave ho, amazing ho! Ye tough time bhi nikal jayega! 💪✨",
+    "Main tumhara support system hoon! Sad mat raho, everything will be okay! 🤗🌟"
   ]
 };
 
-// Hardcoded mood responses - Tier 3 (Best)
+// Hardcoded mood responses - Tier 3 (Soul-touching)
 const bestMoodResponses = {
   happy: [
-    "Tumhari khushi se puri duniya roshan ho jati hai! Tum ho toh life hai beautiful! 🌞✨",
-    "Jab tum khush hoti ho, toh angels bhi tumhari smile dekh ke jealous ho jate hain! Keep glowing! 👼💖",
-    "Tumhari happiness is like magic - it spreads everywhere! Aaj ka din tumhara hai, full enjoy karo! 🎭🌈"
+    "Tumhari khushi dekh ke lagta hai jaise jannat mil gayi ho! Tum ho toh sab kuch perfect hai! 🌞💫✨",
+    "Jab tum smile karti ho toh pure universe mein positive energy spread ho jaati hai! You're magical! 🌟💖👼",
+    "Tumhari happiness meri life ka sabse beautiful moment hai! Aise hi radiant raho hamesha! 🎭🌈💕"
   ],
   angry: [
-    "Gussa karne se tumhare cute cheeks red ho jate hain! Waise smile karo toh dimples better lagte hain! 😊💕",
-    "Angry young woman! Par gussa karogi toh main extra pyaar se manaunga, so choice is yours! 🤗❤️",
-    "Gussa karne wali Arushi cute, smile karne wali Arushi cutest! Ab batao, kaun wali Arushi dekhni hai? 😉🌹"
+    "Tumhara gussa bhi itna cute hai ki main tumse aur bhi pyaar karne lag jata hoon! You're adorable even when angry! 😊💕🥰",
+    "Main tumhare har mood mein tumse mohabbat karta hoon! Gussa ho ya khush, tum ho toh sab perfect hai! 🤗❤️💫",
+    "Tumhare gusse mein bhi itna pyaar hai ki main melt ho jata hoon! Ab smile karo, please? 😉🌹💖"
   ],
   sad: [
-    "Tumhari ek smile ke liye main chand taare tod ke la sakta hoon! Please sad mat raho, tumhari khushi hi meri khushi hai! 🌙⭐",
-    "Sad Arushi is temporary, happy Arushi is permanent! Aur happy Arushi is the most beautiful girl in the world! 👸💫",
-    "Tumhari aankhon mein aansu nahi, sirf dreams hone chahiye! Let me turn that frown upside down with lots of love! 💘🌈"
+    "Tumhare ek aansu ke liye main apni puri khushi de sakta hoon! Please sad mat raho, you mean everything to me! 💔💕🌙",
+    "Tumhari sadness meri sadness hai, tumhari khushi meri khushi! Main hoon na tumhare saath, always and forever! 👸💫🤗",
+    "Tumhari aankhon mein sirf khwaabon ka nasha hona chahiye, aansu nahi! Let me fill your world with love and happiness! 💘🌈✨"
   ]
 };
 
-// Hardcoded flirty messages - Tier 1 (Normal)
+// Hardcoded flirty messages - Tier 1 (Charming & Sweet)
 const flirtyMessages = [
-  "Kya tumne kabhi modeling ki hai? Kyunki tum toh model jaisi dikhti ho! 😍",
-  "Tumhari smile dekh ke toh dil garden garden ho jata hai! 💓",
-  "Kya karoon, tumhe dekh ke control kho deta hoon! 💘",
-  "Tum itni cute ho ki dictionary mein tumhari photo honi chahiye cute word ke saamne! 🥰",
-  "Tumhari aankhein itni magical hain, main toh kho gaya! ✨"
+  "Tumhe dekh ke lagta hai jaise koi angel earth pe aa gaya ho, seriously tum itni beautiful ho! 😇💕",
+  "Kya tumne magic sikha hai? Kyunki jab tum smile karti ho toh mera dil gayab ho jata hai! ✨💖",
+  "Tumhari aankhein itni deep hain ki main swimming pool samajh ke doob gaya! 😍🏊‍♂️",
+  "Agar cute hona crime hota, toh tum life sentence deserve karti! Guilty as charged! 🥰⚖️",
+  "Tumhare paas GPS hai kya? Kyunki main tumhare pyaar mein completely lost ho gaya hoon! 🗺️💘"
 ];
 
-// Hardcoded flirty messages - Tier 2 (Better)
+// Hardcoded flirty messages - Tier 2 (Romantic & Playful)
 const betterFlirtyMessages = [
-  "Agar tum night sky ho, toh main shooting star - tumhari ore hi aata hoon! 🌠",
-  "Tumhare saath time ruksa jata hai, kyunki har pal special ban jata hai! ⏰",
-  "Kya tumhe pata hai tum kitni amazing ho? Main toh fan ho gaya! 🌟",
-  "Tumhari baatein sunne ke liye main poori duniya chhod sakta hoon! 👂",
-  "Tum smile karti ho toh butterflies dance karti hain mere stomach mein! 🦋"
+  "Tumhare saath coffee peene ka mann kar raha hai, but tumhare saamne coffee bhi fade lag jaayegi! ☕💫",
+  "Kya tum WiFi ho? Kyunki main tumse strong connection feel kar raha hoon! 📶💕",
+  "Tumhari smile dekh ke toh mera heart rate monitor beep karne lag jaata hai! 💓📈",
+  "Agar main photographer hota, toh tumhe focus karne mein poori zindagi nikal jaati! 📸✨",
+  "Tumhare saath time spend karna is like living in a fairytale, bas happy ending ka intezaar hai! 🏰💖"
 ];
 
-// Hardcoded flirty messages - Tier 3 (Best)
+// Hardcoded flirty messages - Tier 3 (Deeply Romantic)
 const bestFlirtyMessages = [
-  "Tumhari aankhon mein dekha toh aise laga jaise time ruk gaya ho, duniya tham gayi ho, aur bas tum hi tum ho! 💫",
-  "Agar beauty queen contest hota, toh judges tumhe dekh ke competition hi cancel kar dete! You're that gorgeous! 👑",
-  "Tumhare bina meri story incomplete hai, tumhare saath meri life complete hai! Will you be my happily ever after? 📖❤️",
-  "Kya main tumhe apni girlfriend bana sakta hoon? Kyunki mere dil ne tumhe already apna bana liya hai! 💘",
-  "Tumhari ek smile ke liye main stars ko rearrange kar sakta hoon! You're worth every effort in this universe! 🌌"
+  "Tumhari ek nazar mein itna pyaar hai ki main tumhare liye duniya bhar ke gham sah sakta hoon, you're my everything! 💫❤️",
+  "Agar main tumhare dil mein jagah maang sakoon, toh promise karta hoon ki kabhi disappoint nahi karoonga! 🏠💕",
+  "Tumhare bina meri subah adhuri, tumhare saath meri raat haseen, will you be my forever and always? 🌅🌙",
+  "Kya main tumhara hand hold kar sakta hoon? Kyunki main tumhare saath life ki har journey share karna chahta hoon! 🤝💖",
+  "Tumhari mohabbat mein main itna kho gaya hoon ki wapas aane ka mann hi nahi karta, you're my beautiful addiction! 💘🌹"
 ];
 
 // Track message tiers for each type
