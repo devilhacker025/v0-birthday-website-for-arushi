@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Typewriter } from "@/components/typewriter"
+import { useState } from "react"
 
 const lines = [
   "As your friend, I want you to know that I'll always be here to support you through everything.",
@@ -12,6 +13,12 @@ const lines = [
 ]
 
 export default function MiddleWish() {
+  const [isHovered, setIsHovered] = useState(false);
+  
+  const handleCardClick = () => {
+    window.open("https://birthday-peach-rho.vercel.app/", "_blank");
+  };
+
   return (
     <main className="min-h-dvh bg-gradient-to-br from-purple-100 via-pink-100 to-indigo-100">
       <div className="absolute inset-0 overflow-hidden">
@@ -31,6 +38,51 @@ export default function MiddleWish() {
             Heartfelt Emotions & Beautiful Memories 💫
           </h1>
           <p className="text-lg text-gray-700">Words from the heart, crafted with love and care</p>
+        </motion.div>
+
+        {/* Special Surprise Card */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="mb-12"
+        >
+          <div 
+            className={`relative overflow-hidden bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 rounded-2xl p-1 cursor-pointer transform transition-all duration-500 ${isHovered ? 'scale-[1.02] shadow-2xl' : 'shadow-xl'}`}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onClick={handleCardClick}
+          >
+            <div className="bg-white rounded-xl p-8 relative overflow-hidden">
+              <div className={`absolute inset-0 bg-gradient-to-r from-pink-200/30 via-purple-200/30 to-indigo-200/30 transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}></div>
+              
+              <div className="relative z-10">
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-20 h-20 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center mb-6 shadow-lg">
+                    <span className="text-white text-3xl">✨</span>
+                  </div>
+                  
+                  <h2 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-purple-600 mb-4">
+                    A Special Surprise Awaits You!
+                  </h2>
+                  
+                  <p className="text-gray-700 mb-6 max-w-md">
+                    I've prepared something extraordinary just for you. Click this card to discover a beautiful surprise that expresses how special you are!
+                  </p>
+                  
+                  <div className={`px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full font-medium shadow-md transition-all duration-300 ${isHovered ? 'shadow-lg scale-105' : ''}`}>
+                    Reveal Your Surprise &rarr;
+                  </div>
+                </div>
+              </div>
+              
+              {/* Decorative elements */}
+              <div className="absolute top-4 left-4 w-12 h-12 rounded-full bg-pink-100 opacity-50"></div>
+              <div className="absolute bottom-4 right-4 w-16 h-16 rounded-full bg-purple-100 opacity-50"></div>
+              <div className="absolute top-1/2 right-8 w-8 h-8 rounded-full bg-indigo-100 opacity-50"></div>
+              <div className="absolute bottom-1/3 left-12 w-6 h-6 rounded-full bg-pink-100 opacity-50"></div>
+            </div>
+          </div>
         </motion.div>
 
         <div className="space-y-8">
