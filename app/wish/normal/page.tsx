@@ -303,7 +303,7 @@ const BookCard = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.8, type: "spring" }}
           >
-            i l*** you 😘
+            
           </motion.p>
         </div>
       )

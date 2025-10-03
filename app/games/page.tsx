@@ -34,22 +34,22 @@ export default function Games() {
         <div className="absolute top-40 left-40 w-80 h-80 bg-indigo-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
       </div>
 
-      <section className="relative mx-auto max-w-6xl px-6 py-16">
+      <section className="relative mx-auto max-w-6xl px-4 sm:px-6 py-8 sm:py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
         >
-          <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 mb-4 px-2">
             Mini Games 🎮
           </h1>
-          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-700 max-w-2xl mx-auto px-2">
             Fun games designed just for you — each one crafted so you can enjoy and win! 🏆
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {games.map((game, i) => (
             <motion.div
               key={game.href}
@@ -65,7 +65,7 @@ export default function Games() {
             >
               <Link href={game.href} className="block h-full">
                 <Card className={`h-full bg-gradient-to-br ${game.bgGradient} border-white/50 hover:shadow-2xl transition-all duration-300 overflow-hidden group`}>
-                  <div className={`h-32 bg-gradient-to-br ${game.gradient} relative overflow-hidden flex items-center justify-center`}>
+                  <div className={`h-24 sm:h-32 bg-gradient-to-br ${game.gradient} relative overflow-hidden flex items-center justify-center`}>
                     <div className="absolute inset-0 opacity-20">
                       {Array.from({ length: 12 }).map((_, i) => (
                         <div
@@ -81,17 +81,17 @@ export default function Games() {
                         />
                       ))}
                     </div>
-                    <span className="text-5xl group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-3xl sm:text-4xl lg:text-5xl group-hover:scale-110 transition-transform duration-300">
                       {game.emoji}
                     </span>
                   </div>
 
-                  <CardHeader className="pb-2">
-                    <div className="flex justify-between items-start">
-                      <CardTitle className="text-xl font-bold text-gray-800 group-hover:text-gray-900 transition-colors">
+                  <CardHeader className="pb-2 p-4 sm:p-6">
+                    <div className="flex justify-between items-start gap-2">
+                      <CardTitle className="text-lg sm:text-xl font-bold text-gray-800 group-hover:text-gray-900 transition-colors">
                         {game.title}
                       </CardTitle>
-                      <span className={`text-xs px-2 py-1 rounded-full font-medium ${game.status === "Ready to Play"
+                      <span className={`text-xs px-2 py-1 rounded-full font-medium whitespace-nowrap ${game.status === "Ready to Play"
                         ? "bg-green-100 text-green-700"
                         : "bg-yellow-100 text-yellow-700"
                         }`}>
@@ -100,13 +100,13 @@ export default function Games() {
                     </div>
                   </CardHeader>
 
-                  <CardContent className="pt-0">
-                    <p className="text-gray-600 leading-relaxed mb-4">{game.desc}</p>
+                  <CardContent className="pt-0 p-4 sm:p-6">
+                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">{game.desc}</p>
                     <div className="flex justify-center">
                       <motion.div
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className={`px-6 py-2 bg-gradient-to-r ${game.gradient} text-white rounded-full font-medium shadow-md`}
+                        className={`px-4 sm:px-6 py-2 bg-gradient-to-r ${game.gradient} text-white rounded-full font-medium shadow-md text-sm sm:text-base`}
                       >
                         {game.status === "Ready to Play" ? "Play Now" : "View Details"}
                       </motion.div>

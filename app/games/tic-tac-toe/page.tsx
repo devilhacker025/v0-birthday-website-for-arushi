@@ -106,34 +106,34 @@ export default function TicTacToe() {
   }
 
   return (
-    <main className="min-h-dvh bg-gradient-to-br from-blue-100 via-cyan-100 to-teal-100 grid place-items-center px-6">
+    <main className="min-h-dvh bg-gradient-to-br from-blue-100 via-cyan-100 to-teal-100 grid place-items-center px-4 sm:px-6">
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-        <div className="absolute top-40 left-40 w-80 h-80 bg-teal-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+        <div className="absolute -top-20 -right-20 sm:-top-40 sm:-right-40 w-40 h-40 sm:w-80 sm:h-80 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div className="absolute -bottom-20 -left-20 sm:-bottom-40 sm:-left-40 w-40 h-40 sm:w-80 sm:h-80 bg-cyan-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div className="absolute top-20 left-20 sm:top-40 sm:left-40 w-40 h-40 sm:w-80 sm:h-80 bg-teal-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
       </div>
 
       <motion.section 
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6 }}
-        className="relative w-full max-w-md bg-white/80 backdrop-blur-md rounded-2xl p-8 border border-white/50 shadow-2xl"
+        className="relative w-full max-w-sm sm:max-w-md bg-white/80 backdrop-blur-md rounded-2xl p-4 sm:p-6 lg:p-8 border border-white/50 shadow-2xl"
       >
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-600 mb-2">
+        <div className="text-center mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-600 mb-2">
             Tic Tac Toe ⭕
           </h1>
-          <p className="text-gray-600">You are <span className="font-bold text-blue-600">X</span>. Let's see if you can beat the AI! 🎯</p>
+          <p className="text-sm sm:text-base text-gray-600">You are <span className="font-bold text-blue-600">X</span>. Let's see if you can beat the AI! 🎯</p>
         </div>
 
-        <div className="grid grid-cols-3 gap-3 mb-6">
+        <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-4 sm:mb-6 max-w-xs mx-auto">
           {board.map((cell, i) => (
             <motion.button
               key={i}
               whileHover={{ scale: cell ? 1 : 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => makeMove(i)}
-              className={`h-20 w-20 text-3xl font-bold rounded-xl border-2 transition-all duration-200 ${
+              className={`h-16 w-16 sm:h-20 sm:w-20 text-2xl sm:text-3xl font-bold rounded-xl border-2 transition-all duration-200 ${
                 cell 
                   ? cell === "X" 
                     ? "bg-blue-100 border-blue-300 text-blue-600" 
@@ -190,12 +190,12 @@ export default function TicTacToe() {
           )}
         </div>
 
-        <div className="flex justify-center gap-4">
+        <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={reset}
-            className="px-6 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-full font-medium shadow-md hover:shadow-lg transition-shadow"
+            className="px-4 sm:px-6 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-full font-medium shadow-md hover:shadow-lg transition-shadow text-sm sm:text-base"
           >
             New Game 🔄
           </motion.button>
@@ -203,7 +203,7 @@ export default function TicTacToe() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-2 bg-gradient-to-r from-gray-500 to-gray-600 text-white rounded-full font-medium shadow-md hover:shadow-lg transition-shadow"
+              className="px-4 sm:px-6 py-2 bg-gradient-to-r from-gray-500 to-gray-600 text-white rounded-full font-medium shadow-md hover:shadow-lg transition-shadow text-sm sm:text-base w-full sm:w-auto"
             >
               Back to Games
             </motion.button>
