@@ -56,22 +56,33 @@ export default function MiddleWish() {
             <div className="bg-white rounded-xl p-8 relative overflow-hidden">
               <div className={`absolute inset-0 bg-gradient-to-r from-pink-200/30 via-purple-200/30 to-indigo-200/30 transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}></div>
               
+              {/* Animated sparkles */}
+              <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-10 left-10 w-3 h-3 bg-pink-400 rounded-full animate-ping opacity-75"></div>
+                <div className="absolute top-20 right-20 w-2 h-2 bg-purple-400 rounded-full animate-ping opacity-75 animation-delay-700"></div>
+                <div className="absolute bottom-10 left-1/4 w-2 h-2 bg-indigo-400 rounded-full animate-ping opacity-75 animation-delay-1000"></div>
+                <div className="absolute top-1/3 right-10 w-3 h-3 bg-pink-400 rounded-full animate-ping opacity-75 animation-delay-1500"></div>
+              </div>
+              
               <div className="relative z-10">
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-20 h-20 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center mb-6 shadow-lg">
-                    <span className="text-white text-3xl">✨</span>
+                  <div className="w-24 h-24 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center mb-6 shadow-lg transform transition-transform duration-500 hover:rotate-12">
+                    <span className="text-white text-4xl animate-pulse">✨</span>
                   </div>
                   
                   <h2 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-purple-600 mb-4">
-                    A Special Surprise Awaits You!
+                    A Magical Surprise Just For You!
                   </h2>
                   
                   <p className="text-gray-700 mb-6 max-w-md">
-                    I've prepared something extraordinary just for you. Click this card to discover a beautiful surprise that expresses how special you are!
+                    I've created something truly special that will make your heart smile. Click to discover a beautiful surprise that celebrates how amazing you are!
                   </p>
                   
-                  <div className={`px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full font-medium shadow-md transition-all duration-300 ${isHovered ? 'shadow-lg scale-105' : ''}`}>
-                    Reveal Your Surprise &rarr;
+                  <div className={`group px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full font-medium shadow-md transition-all duration-300 ${isHovered ? 'shadow-lg scale-105' : ''}`}>
+                    <span className="flex items-center justify-center gap-2">
+                      <span>Reveal Your Magical Surprise</span>
+                      <span className="transform transition-transform group-hover:translate-x-1">&rarr;</span>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -81,6 +92,10 @@ export default function MiddleWish() {
               <div className="absolute bottom-4 right-4 w-16 h-16 rounded-full bg-purple-100 opacity-50"></div>
               <div className="absolute top-1/2 right-8 w-8 h-8 rounded-full bg-indigo-100 opacity-50"></div>
               <div className="absolute bottom-1/3 left-12 w-6 h-6 rounded-full bg-pink-100 opacity-50"></div>
+              
+              {/* Extra decorative elements */}
+              <div className="absolute top-1/4 left-1/3 w-4 h-4 rounded-full bg-purple-100 opacity-30 animate-pulse"></div>
+              <div className="absolute bottom-1/4 right-1/3 w-5 h-5 rounded-full bg-indigo-100 opacity-30 animate-pulse animation-delay-700"></div>
             </div>
           </div>
         </motion.div>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { gsap } from "gsap"
@@ -30,6 +30,12 @@ export default function AdvanceWish() {
     return () => ctx.revert()
   }, [])
 
+  const [isHovered, setIsHovered] = useState(false);
+  
+  const handleCardClick = () => {
+    window.open("https://advance1-azure.vercel.app/", "_blank");
+  };
+
   return (
     <main className="min-h-dvh bg-gradient-to-br from-amber-100 via-orange-100 to-red-100 grid place-items-center overflow-hidden">
       <div className="absolute inset-0 overflow-hidden">
@@ -49,7 +55,51 @@ export default function AdvanceWish() {
       </div>
 
       <section ref={ref} className="relative max-w-5xl px-6 text-center">
-        <div className="bg-white/90 backdrop-blur-md rounded-3xl p-12 shadow-2xl border border-white/50">
+        {/* Special Surprise Card */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="mb-12"
+        >
+          <div 
+            className={`relative overflow-hidden bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 rounded-2xl p-1 cursor-pointer transform transition-all duration-500 ${isHovered ? 'scale-[1.02] shadow-2xl' : 'shadow-xl'}`}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onClick={handleCardClick}
+          >
+            <div className="bg-white rounded-xl p-8 relative overflow-hidden">
+              <div className={`absolute inset-0 bg-gradient-to-r from-amber-200/30 via-orange-200/30 to-red-200/30 transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}></div>
+              
+              <div className="relative z-10">
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-20 h-20 bg-gradient-to-br from-amber-500 to-red-600 rounded-full flex items-center justify-center mb-6 shadow-lg">
+                    <span className="text-white text-3xl">🎁</span>
+                  </div>
+                  
+                  <h2 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-red-600 mb-4">
+                    Your Ultimate Birthday Surprise!
+                  </h2>
+                  
+                  <p className="text-gray-700 mb-6 max-w-md">
+                    I've created something extraordinary just for you. Click here to discover a magical birthday experience that will make your day unforgettable!
+                  </p>
+                  
+                  <div className={`px-6 py-3 bg-gradient-to-r from-amber-500 to-red-600 text-white rounded-full font-medium shadow-md transition-all duration-300 ${isHovered ? 'shadow-lg scale-105' : ''}`}>
+                    Open Your Special Gift &rarr;
+                  </div>
+                </div>
+              </div>
+              
+              {/* Decorative elements */}
+              <div className="absolute top-4 left-4 w-12 h-12 rounded-full bg-amber-100 opacity-50"></div>
+              <div className="absolute bottom-4 right-4 w-16 h-16 rounded-full bg-orange-100 opacity-50"></div>
+              <div className="absolute top-1/2 right-8 w-8 h-8 rounded-full bg-red-100 opacity-50"></div>
+              <div className="absolute bottom-1/3 left-12 w-6 h-6 rounded-full bg-amber-100 opacity-50"></div>
+            </div>
+           </div>
+         </motion.div>
+          <div className="bg-white/90 backdrop-blur-md rounded-3xl p-12 shadow-2xl border border-white/50">
           <div className="space-y-8">
             <p className="grand-line text-xl md:text-2xl text-gray-700 font-medium leading-relaxed">
               Arushi, you're not just a person, you're an entire beautiful story waiting to unfold.
